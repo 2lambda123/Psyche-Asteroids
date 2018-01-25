@@ -1,7 +1,7 @@
 // Canvas Asteroids
 //
 // Copyright (c) 2010 Doug McInnes
-//
+// Modified by John Thurmond
 
 KEY_CODES = {
   32: 'space',
@@ -367,15 +367,54 @@ Sprite = function () {
 
 Ship = function () {
   this.init("ship",
-            [-5,   4,
-              0, -12,
-              5,   4]);
+ //           [-5,   4,
+ //             0, -12,
+ //             5,   4]);
+[0,-5,
+-5,-5,
+-5,-1,
+-8,-4,
+-15,-4,
+-15,-12,
+-22,-12,
+-22,-4,
+-29,-4,
+-29,4,
+-22,4,
+-22,12,
+-15,12,
+-15,4,
+-8,4,
+-5,1,
+-5,5,
+-1,5,
+-5,8,
+5,8,
+1,5,
+5,5,
+5,1,
+8,4,
+15,4,
+15,12,
+22,12,
+22,4,
+29,4,
+29,-4,
+22,-4,
+22,-12,
+15,-12,
+15,-4,
+8,-4,
+5,-1,
+5,-5,
+0,-5]);
 
   this.children.exhaust = new Sprite();
   this.children.exhaust.init("exhaust",
-                             [-3,  6,
-                               0, 11,
-                               3,  6]);
+  //                           [-3,  6,
+  //                             0, 11,
+  //                             3,  6]);
+  [0,0]);
 
   this.bulletCounter = 0;
 
@@ -637,16 +676,52 @@ AlienBullet.prototype = new Bullet();
 
 Asteroid = function () {
   this.init("asteroid",
-            [-10,   0,
-              -5,   7,
-              -3,   4,
-               1,  10,
-               5,   4,
-              10,   0,
-               5,  -6,
-               2, -10,
-              -4, -10,
-              -4,  -5]);
+//            [-10,   0,
+//              -5,   7,
+//              -3,   4,
+//               1,  10,
+//               5,   4,
+//              10,   0,
+//               5,  -6,
+//               2, -10,
+//              -4, -10,
+//              -4,  -5]);
+                    [5,-9,
+                    -2,-8,
+                    -7,-6,
+                    -9,-1,
+                    -6,5,
+                    -2,9,
+                    2,9,
+                    6,8,
+                    10,5,
+                    12,2,
+                    12,0,
+                    10,-4,
+                    9,-6,
+                    7,-8,
+                    5,-9,
+                    4,-6,
+                    1,-6,
+                    -0.5,-3,
+                    1,0,
+                    4,0,
+                    6.5,-1,
+                    7,-3,
+                    6.5,-5,
+                    4,-6,
+                    1,-7,
+                    -1,-3,
+                    -1,-2,
+                    -5,-1,
+                    -5,2,
+                    -3,4,
+                    0,3,
+                    0,1,
+                    -1,-1,
+                    -2,-2,
+                    5,-9]);
+
 
   this.visible = true;
   this.scale = 6;
@@ -917,7 +992,7 @@ Game = {
       this.state = 'waiting';
     },
     waiting: function () {
-      Text.renderText(window.ipad ? 'Touch Screen to Start' : 'Press Space to Start', 36, Game.canvasWidth/2 - 270, Game.canvasHeight/2);
+      Text.renderText(window.ipad ? 'Psyche - Touch to start' : 'Psyche - Space to start', 30, Game.canvasWidth/2 - 270, Game.canvasHeight/2);
       if (KEY_STATUS.space || window.gameStart) {
         KEY_STATUS.space = false; // hack so we don't shoot right away
         window.gameStart = false;
@@ -997,7 +1072,7 @@ Game = {
       }
     },
     end_game: function () {
-      Text.renderText('GAME OVER', 50, Game.canvasWidth/2 - 160, Game.canvasHeight/2 + 10);
+      Text.renderText('MISSION OVER', 40, Game.canvasWidth/2 - 160, Game.canvasHeight/2 + 10);
       if (this.timer == null) {
         this.timer = Date.now();
       }
@@ -1166,7 +1241,7 @@ $(function () {
     // extra dudes
     for (i = 0; i < Game.lives; i++) {
       context.save();
-      extraDude.x = Game.canvasWidth - (8 * (i + 1));
+      extraDude.x = Game.canvasWidth - (40 * (i + 1));
       extraDude.y = 32;
       extraDude.configureTransform();
       extraDude.draw();
